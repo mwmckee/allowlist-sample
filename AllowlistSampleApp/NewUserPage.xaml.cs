@@ -5,12 +5,12 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
-using Microsoft.Maker.ProjectOxford.Face.Whitelist;
+using Microsoft.Maker.ProjectOxford.Face.Allowlist;
 using Microsoft.Maker.Devices.Media.UsbCamera;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace WhitelistSampleApp
+namespace AllowlistSampleApp
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -73,12 +73,12 @@ namespace WhitelistSampleApp
         {
             if(!string.IsNullOrWhiteSpace(UserNameBox.Text))
             {
-                StorageFolder whitelistFolder = await KnownFolders.PicturesLibrary.CreateFolderAsync(GeneralConstants.WhiteListFolderName, CreationCollisionOption.OpenIfExists);
-                StorageFolder currentFolder = await whitelistFolder.CreateFolderAsync(UserNameBox.Text, CreationCollisionOption.ReplaceExisting);
+                StorageFolder allowlistFolder = await KnownFolders.PicturesLibrary.CreateFolderAsync(GeneralConstants.AllowListFolderName, CreationCollisionOption.OpenIfExists);
+                StorageFolder currentFolder = await allowlistFolder.CreateFolderAsync(UserNameBox.Text, CreationCollisionOption.ReplaceExisting);
 
                 await currentIdPhotoFile.MoveAsync(currentFolder);
 
-                FaceWhitelist.AddUserToWhitelist(UserNameBox.Text, currentFolder);
+                FaceAllowlist.AddPersonToList(UserNameBox.Text, currentFolder);
 
                 await webcam.StopCameraPreview();
                 Frame.Navigate(typeof(MainPage));

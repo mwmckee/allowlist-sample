@@ -4,11 +4,11 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.Storage;
 using Microsoft.Maker.Devices.Media.UsbCamera;
-using Microsoft.Maker.ProjectOxford.Face.Whitelist;
+using Microsoft.Maker.ProjectOxford.Face.Allowlist;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace WhitelistSampleApp
+namespace AllowlistSampleApp
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -62,7 +62,7 @@ namespace WhitelistSampleApp
 
         public async void InitializeApp()
         {
-            initializedOxford = await FaceWhitelist.InitializeOxford();
+            initializedOxford = await FaceAllowlist.InitializeOxford();
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -78,8 +78,8 @@ namespace WhitelistSampleApp
                 StorageFile image = await webcam.CapturePhoto();
                 try
                 {
-                    // Oxford determines whether or not the user is on the Whitelist and returns true if so
-                    recognizedUsers = await FaceWhitelist.IsFaceInWhitelist(image);
+                    // Oxford determines whether or not the user is on the Allowlist and returns true if so
+                    recognizedUsers = await FaceAllowlist.IsPersonInList(image);
                     if (recognizedUsers.Count > 0)
                     {
                         Text.Text = recognizedUsers[0];

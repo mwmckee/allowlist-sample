@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24704.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhitelistSampleApp", "WhitelistSampleApp\WhitelistSampleApp.csproj", "{DFA1C3A0-E2F7-4DAF-A3FF-D14C0C347630}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllowlistSampleApp", "AllowlistSampleApp\AllowlistSampleApp.csproj", "{DFA1C3A0-E2F7-4DAF-A3FF-D14C0C347630}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbCamera", "usb-camera\UsbCamera\UsbCamera.csproj", "{C00C9943-2BDC-4FE8-B69E-09FC2B272CC2}"
 EndProject

@@ -1,5 +1,5 @@
-#WhitelistSampleApp
-This sample app is a test for all the four functions in the FaceWhitelist block.
+#AllowlistSampleApp
+This sample app is a test for all the four functions in the FaceAllowlist block.
 
 ## Running the Sample code
 

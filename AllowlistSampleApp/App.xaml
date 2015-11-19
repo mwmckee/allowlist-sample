@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="WhitelistSampleApp.App"
+    x:Class="AllowlistSampleApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:WhitelistSampleApp"
+    xmlns:local="using:AllowlistSampleApp"
     RequestedTheme="Light">
 
 </Application>

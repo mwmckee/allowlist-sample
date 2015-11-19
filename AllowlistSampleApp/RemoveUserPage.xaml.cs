@@ -6,12 +6,12 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
-using Microsoft.Maker.ProjectOxford.Face.Whitelist;
+using Microsoft.Maker.ProjectOxford.Face.Allowlist;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace WhitelistSampleApp
+namespace AllowlistSampleApp
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -24,9 +24,9 @@ namespace WhitelistSampleApp
             public StorageFolder ImageFolder { get; set; }
             public BitmapImage Image { get; set; }
         }
-        private List<imageList> whitelistedUsers = new List<imageList>();
-        private StorageFolder whitelistFolder;
-        private bool currentlyUpdatingWhitelist = false;
+        private List<imageList> allowlistedUsers = new List<imageList>();
+        private StorageFolder allowlistFolder;
+        private bool currentlyUpdatingAllowlist = false;
 
         public RemoveUserPage()
         {
@@ -35,7 +35,7 @@ namespace WhitelistSampleApp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            UpdateWhitelistedUsers();
+            UpdateAllowlistedUsers();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -43,38 +43,38 @@ namespace WhitelistSampleApp
             Frame.Navigate(typeof(MainPage));
         }
 
-        private async void UpdateWhitelistedUsers()
+        private async void UpdateAllowlistedUsers()
         {
-            if (!currentlyUpdatingWhitelist)
+            if (!currentlyUpdatingAllowlist)
             {
-                currentlyUpdatingWhitelist = true;
-                await UpdateWhitelistedUsersList();
-                UpdateWhitelistedUsersGrid();
-                currentlyUpdatingWhitelist = false;
+                currentlyUpdatingAllowlist = true;
+                await UpdateAllowlistedUsersList();
+                UpdateAllowlistedUsersGrid();
+                currentlyUpdatingAllowlist = false;
             }
         }
 
-        private async Task UpdateWhitelistedUsersList()
+        private async Task UpdateAllowlistedUsersList()
         {
-            // Clears whitelist
-            whitelistedUsers.Clear();
+            // Clears allowlist
+            allowlistedUsers.Clear();
 
-            // If the whitelistFolder has not been opened, open it
-            if (whitelistFolder == null)
+            // If the allowlistFolder has not been opened, open it
+            if (allowlistFolder == null)
             {
-                whitelistFolder = await KnownFolders.PicturesLibrary.CreateFolderAsync(GeneralConstants.WhiteListFolderName, CreationCollisionOption.OpenIfExists);
+                allowlistFolder = await KnownFolders.PicturesLibrary.CreateFolderAsync(GeneralConstants.AllowListFolderName, CreationCollisionOption.OpenIfExists);
             }
 
-            // Populates subFolders list with all sub folders within the whitelist folders.
+            // Populates subFolders list with all sub folders within the allowlist folders.
             // Each of these sub folders represents the Id photos for a single User.
-            var subFolders = await whitelistFolder.GetFoldersAsync();
+            var subFolders = await allowlistFolder.GetFoldersAsync();
 
             if(subFolders.Count == 0)
             {
                 noUsers.Visibility = Visibility.Visible;
             }
 
-            // Iterate all subfolders in whitelist
+            // Iterate all subfolders in allowlist
             foreach (StorageFolder folder in subFolders)
             {
                 var filesInFolder = await folder.GetFilesAsync();
@@ -83,29 +83,29 @@ namespace WhitelistSampleApp
                 BitmapImage userImage = new BitmapImage();
                 await userImage.SetSourceAsync(photoStream);
 
-                imageList whitelistedUser = new imageList();
-                whitelistedUser.Image = userImage;
-                whitelistedUser.ImageFolder = folder;
-                whitelistedUser.Name = folder.Name;
-                whitelistedUsers.Add(whitelistedUser);
+                imageList allowlistedUser = new imageList();
+                allowlistedUser.Image = userImage;
+                allowlistedUser.ImageFolder = folder;
+                allowlistedUser.Name = folder.Name;
+                allowlistedUsers.Add(allowlistedUser);
             }
         }
 
 
-        private void UpdateWhitelistedUsersGrid()
+        private void UpdateAllowlistedUsersGrid()
         {
-            WhitelistedUsersGrid.ItemsSource = new List<imageList>();
-            WhitelistedUsersGrid.ItemsSource = whitelistedUsers;
+            AllowlistedUsersGrid.ItemsSource = new List<imageList>();
+            AllowlistedUsersGrid.ItemsSource = allowlistedUsers;
 
             OxfordLoadingRing.Visibility = Visibility.Collapsed;
         }
 
-        private async void WhitelistedUsersGrid_ItemClick(object sender, ItemClickEventArgs e)
+        private async void AllowlistedUsersGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
             imageList toDelete = (imageList)e.ClickedItem;
-            FaceWhitelist.RemoveUserFromWhitelist(toDelete.Name);
+            FaceAllowlist.RemovePersonFromList(toDelete.Name);
             await toDelete.ImageFolder.DeleteAsync();
-            UpdateWhitelistedUsers();
+            UpdateAllowlistedUsers();
         }
     }
 }
