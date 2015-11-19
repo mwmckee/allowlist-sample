@@ -1,0 +1,6 @@
+[submodule "usb-camera"]
+	path = usb-camera
+	url = https://github.com/ms-iot/usb-camera
+[submodule "face-whitelist"]
+	path = face-whitelist
+	url = https://github.com/apdutta/face-whitelist

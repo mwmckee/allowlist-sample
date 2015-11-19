@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="WhitelistSampleApp.NewUserPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WhitelistSampleApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" RequestedTheme="Dark">
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
+        <Button x:Name="BackButton" Content="Back" Grid.Column="0" HorizontalAlignment="Left" Margin="32,32,0,0"  VerticalAlignment="Top" Click="BackButton_Click"/>
+        <CaptureElement x:Name='WebcamFeed' Loaded="WebcamFeed_Loaded" Height="500" Width="500" Margin="0,-200,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image x:Name="IdPhotoControl" Visibility="Collapsed" Height="500" Width="500" Margin="0,-200,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>            
+
+        <Button x:Name="CaptureButton" Content="Capture ID Photo"  HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Center" Click="Capture_Click" />
+
+        <Grid x:Name="UserNameGrid" Visibility="Collapsed">
+            <TextBox x:Name="UserNameBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="800" HorizontalAlignment="Center" Margin="0,0,0,110" PlaceholderText="Photo ID Name (ex: John Doe)"/>
+            <Button x:Name="ConfirmButton" Width="130" Content="Confirm" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="ConfirmButton_Click" Margin="-200,0,0,40"/>
+            <Button x:Name="CancelButton" Width ="130" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="CancelButton_Click" Margin=" 200,0,0,40"/>
+        </Grid>
+    </Grid>
+</Page>
