@@ -9,3 +9,4 @@ This sample app is a test for all the four functions in the FaceAllowlist block.
    ```git submodule update```
 3. Connect a USB camera, monitor, keyboard and mouse to the Pi. 
 4. Open the solution file and in the "FaceRecognition" project, open Constants.cs. Replace the OxfordAPIKey with your primary subscription key then run project.
+5. Ensure that AllowlistSampleApp is set as your startup project and deploy your app.
