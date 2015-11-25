@@ -103,7 +103,7 @@ namespace AllowlistSampleApp
         private async void AllowlistedUsersGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
             imageList toDelete = (imageList)e.ClickedItem;
-            FaceAllowlist.RemovePersonFromList(toDelete.Name);
+            await FaceAllowlist.RemovePersonFromList(toDelete.Name);
             await toDelete.ImageFolder.DeleteAsync();
             UpdateAllowlistedUsers();
         }

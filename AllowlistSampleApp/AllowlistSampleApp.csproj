@@ -143,6 +143,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\face-whitelist\ClientLibrary\FaceClientLibrary.csproj">
+      <Project>{34daa01d-3f6b-4622-9425-726b0b4a6c78}</Project>
+      <Name>FaceClientLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\face-whitelist\FaceRecognition\FaceRecognition.csproj">
       <Project>{713acbaa-53a9-48d1-b683-d329314011a7}</Project>
       <Name>FaceRecognition</Name>

@@ -5,8 +5,10 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
+using Microsoft.ProjectOxford.Face;
 using Microsoft.Maker.ProjectOxford.Face.Allowlist;
 using Microsoft.Maker.Devices.Media.UsbCamera;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -77,8 +79,19 @@ namespace AllowlistSampleApp
                 StorageFolder currentFolder = await allowlistFolder.CreateFolderAsync(UserNameBox.Text, CreationCollisionOption.ReplaceExisting);
 
                 await currentIdPhotoFile.MoveAsync(currentFolder);
-
-                FaceAllowlist.AddPersonToList(UserNameBox.Text, currentFolder);
+                try
+                {
+                    await FaceAllowlist.AddPersonToList(UserNameBox.Text, currentFolder);
+                } 
+                catch(ClientException exception)
+                {
+                    if(exception.HttpStatus == (System.Net.HttpStatusCode)429)
+                    {
+                        var dialog = new Windows.UI.Popups.MessageDialog("Command rate exceeded. Please wait a minute and resubmit your request.");
+                        dialog.Commands.Add(new UICommand("Ok"));
+                        await dialog.ShowAsync();
+                    }
+                }
 
                 await webcam.StopCameraPreview();
                 Frame.Navigate(typeof(MainPage));
